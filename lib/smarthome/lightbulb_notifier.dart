@@ -58,7 +58,7 @@ class LightbulbNotifier extends _$LightbulbNotifier {
       return;
     }
 
-    final response = await dio.get('$apiUrl/bulb/scene/$ip/$newState');
+    final response = await dio.get('$apiUrl/bulb/$ip/scene/$newState');
     if (response.statusCode == 200) {
       state = AsyncData(LightbulbState(currentScene: newState));
     } else {
