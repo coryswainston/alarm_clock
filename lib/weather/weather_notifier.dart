@@ -1,5 +1,5 @@
+import 'package:alarm_clock/network.dart';
 import 'package:alarm_clock/weather/weather_data.dart';
-import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'weather_notifier.g.dart';
@@ -8,7 +8,7 @@ part 'weather_notifier.g.dart';
 class WeatherNotifier extends _$WeatherNotifier {
   @override
   Future<WeatherData> build() async {
-    final response = await Dio().get(
+    final response = await dio.get(
       'https://api.open-meteo.com/v1/forecast',
       queryParameters: {
         'latitude': 40.1150,

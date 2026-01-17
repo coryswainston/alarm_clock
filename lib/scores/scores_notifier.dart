@@ -1,3 +1,4 @@
+import 'package:alarm_clock/network.dart';
 import 'package:alarm_clock/scores/score.dart';
 import 'package:dio/dio.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +20,7 @@ class ScoresNotifier extends _$ScoresNotifier {
       'dates[]': dates.map((d) => DateFormat('yyyy-MM-dd').format(d)).toList(),
       'team_ids[]': [29],
     };
-    final response = await Dio().get(
+    final response = await dio.get(
       'https://api.balldontlie.io/v1/games',
       queryParameters: queryParams,
       options: Options(

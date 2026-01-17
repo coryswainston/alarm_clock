@@ -1,36 +1,32 @@
+import 'package:alarm_clock/constants.dart';
+import 'package:alarm_clock/network.dart';
 import 'package:alarm_clock/smarthome/lightbulb_state.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'lightbulb_notifier.g.dart';
 
-const corysLamp = '192.168.40.182';
-const annasLamp = '192.168.40.225';
-
-const bridgeUrl = "http://127.0.0.1:8000";
-
 @Riverpod(keepAlive: true)
 class LightbulbNotifier extends _$LightbulbNotifier {
   @override
   FutureOr<LightbulbState> build(String ip) async {
-    if (kIsWeb) return LightbulbState(currentScene: 'off');
-
-    final response = await Dio().get('$bridgeUrl/status/$ip');
-    if (response.statusCode == 200) {
-      return LightbulbState(currentScene: response.data['current_scene']);
-    } else {
+    print("BUILDING");
+    try {
+      final response = await dio.get('$apiUrl/bulb/$ip/status');
+      print(response.data);
+      if (response.statusCode == 200) {
+        return LightbulbState(currentScene: response.data['current_scene']);
+      } else {
+        throw Exception("Failed to get bulb status");
+      }
+    } catch (e) {
+      print("ERROR: $e");
       throw Exception("Failed to get bulb status");
     }
   }
 
   Future<void> setBulbState(String scene) async {
-    if (kIsWeb) {
-      state = AsyncData(LightbulbState(currentScene: scene));
-      return;
-    }
-
-    final response = await Dio().get('$bridgeUrl/scene/$ip/$scene');
+    final response = await dio.get('$apiUrl/bulb/$ip/scene/$scene');
     if (response.statusCode == 200) {
       state = AsyncData(LightbulbState(currentScene: scene));
       return;
@@ -62,7 +58,7 @@ class LightbulbNotifier extends _$LightbulbNotifier {
       return;
     }
 
-    final response = await Dio().get('$bridgeUrl/scene/$ip/$newState');
+    final response = await dio.get('$apiUrl/scene/$ip/$newState');
     if (response.statusCode == 200) {
       state = AsyncData(LightbulbState(currentScene: newState));
     } else {
