@@ -207,7 +207,7 @@ class ClockView extends HookConsumerWidget {
             ),
           ),
           Positioned(
-            top: 12,
+            bottom: 12,
             right: 16,
             child: LightsWidget(),
           ),
