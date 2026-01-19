@@ -23,19 +23,24 @@ class WeatherWidget extends HookConsumerWidget {
       };
     }, []);
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 18.0, top: 14.0),
-      child: Column(
+    return Container(
+      decoration: BoxDecoration(
+        color: ColorScheme.of(context).surfaceContainer,
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 9.0),
+      child: Row(
         children: [
-          Row(
+          Icon(
+            WeatherData.getWeatherIcon(
+              weatherData?.code ?? 0,
+            ),
+            size: 32,
+          ),
+          const SizedBox(width: 8.0),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Icon(
-                WeatherData.getWeatherIcon(
-                  weatherData?.code ?? 0,
-                ),
-                size: 26,
-              ),
-              const SizedBox(width: 14.0),
               Text(
                 '${weatherData?.temperature.toStringAsFixed(0) ?? '--'}\u00B0',
                 style: TextStyle(
@@ -43,6 +48,16 @@ class WeatherWidget extends HookConsumerWidget {
                   fontWeight: FontWeight.w900,
                   height: 1.0,
                 ),
+              ),
+              const SizedBox(height: 2.0),
+              Text(
+                WeatherData.getWeatherDescription(weatherData?.code ?? 0),
+                style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  height: 1.0,
+                ),
+                textAlign: TextAlign.right,
               ),
             ],
           ),

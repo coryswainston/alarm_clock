@@ -4,6 +4,7 @@ import 'package:alarm_clock/clock/alarm_notifier.dart';
 import 'package:alarm_clock/constants.dart';
 import 'package:alarm_clock/scores/scores_widget.dart';
 import 'package:alarm_clock/smarthome/lightbulb_notifier.dart';
+import 'package:alarm_clock/smarthome/lights_widget.dart';
 import 'package:alarm_clock/theme_notifier.dart';
 import 'package:alarm_clock/weather/weather_widget.dart';
 import 'package:flutter/material.dart';
@@ -132,15 +133,16 @@ class ClockView extends HookConsumerWidget {
                     ],
                   ),
                 ] else if (setAlarm.value == null)
-                  IconButton(
-                    iconSize: 36,
-                    color: ColorScheme.of(context).onSurface,
-                    onPressed: () {
-                      setAlarm.value = TimeOfDay(hour: 6, minute: 30);
-                      editingAlarm.value = true;
-                    },
-                    icon: Icon(Icons.alarm_add),
-                  )
+                  // IconButton(
+                  //   iconSize: 36,
+                  //   color: ColorScheme.of(context).onSurface,
+                  //   onPressed: () {
+                  //     setAlarm.value = TimeOfDay(hour: 6, minute: 30);
+                  //     editingAlarm.value = true;
+                  //   },
+                  //   icon: Icon(Icons.alarm_add),
+                  // )
+                  SizedBox()
                 else ...[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -182,27 +184,32 @@ class ClockView extends HookConsumerWidget {
               ],
             ),
           ),
+          // Positioned(
+          //   top: 0,
+          //   right: 0,
+          //   child: IconButton(
+          //     onPressed: () => ref.read(themeNotifierProvider.notifier).toggleDarkMode(),
+          //     icon: Icon(
+          //       Icons.brightness_6,
+          //       color: darkMode ? Colors.white : Colors.black,
+          //     ),
+          //   ),
+          // ),
           Positioned(
-            top: 0,
-            right: 0,
-            child: IconButton(
-              onPressed: () => ref.read(themeNotifierProvider.notifier).toggleDarkMode(),
-              icon: Icon(
-                Icons.brightness_6,
-                color: darkMode ? Colors.white : Colors.black,
-              ),
-            ),
-          ),
-          Positioned(
-            top: 0,
-            left: 0,
+            top: 12,
+            left: 16,
             child: Row(
-              spacing: 12.0,
+              spacing: 16.0,
               children: [
                 WeatherWidget(),
                 ScoresWidget(),
               ],
             ),
+          ),
+          Positioned(
+            top: 12,
+            right: 16,
+            child: LightsWidget(),
           ),
         ],
       ),

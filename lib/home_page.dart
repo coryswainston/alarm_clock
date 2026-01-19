@@ -11,7 +11,7 @@ class HomePage extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final tabController = useTabController(initialLength: 3, initialIndex: 1);
+    final tabController = useTabController(initialLength: 2, initialIndex: 1);
     final theme = ref.watch(themeNotifierProvider);
 
     return Scaffold(
@@ -27,7 +27,6 @@ class HomePage extends HookConsumerWidget {
                     children: [
                       WeatherView(),
                       ClockView(),
-                      SmarthomeView(),
                     ],
                   ),
                 ),

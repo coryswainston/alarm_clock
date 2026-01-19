@@ -10,10 +10,8 @@ part 'lightbulb_notifier.g.dart';
 class LightbulbNotifier extends _$LightbulbNotifier {
   @override
   FutureOr<LightbulbState> build(String ip) async {
-    print("BUILDING");
     try {
       final response = await dio.get('$apiUrl/bulb/$ip/status');
-      print(response.data);
       if (response.statusCode == 200) {
         return LightbulbState(currentScene: response.data['current_scene']);
       } else {

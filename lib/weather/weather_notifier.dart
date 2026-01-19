@@ -21,7 +21,6 @@ class WeatherNotifier extends _$WeatherNotifier {
     );
 
     if (response.statusCode == 200) {
-      print(response.data['current']);
       return WeatherData.fromJson(response.data['current']);
     } else {
       throw Exception('Failed to load weather data');

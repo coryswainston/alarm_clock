@@ -48,9 +48,9 @@ class WeatherData {
   static String getWeatherDescription(int code) {
     switch (code) {
       case 0:
-        return 'Sunny';
+        return 'Clear';
       case 1:
-        return 'Mostly Sunny';
+        return 'Mostly clear';
       case 2:
         return 'Partly cloudy';
       case 3:

@@ -44,13 +44,17 @@ class ScoresWidget extends HookConsumerWidget {
       }
     }
 
-    return Padding(
-      padding: const EdgeInsets.only(left: 18.0, top: 12.0),
-      child: Row(
-        spacing: 40.0,
-        children: [
-          for (final score in scores)
-            Row(
+    return Row(
+      spacing: 16.0,
+      children: [
+        for (final score in scores)
+          Container(
+            decoration: BoxDecoration(
+              color: ColorScheme.of(context).surfaceContainer,
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+            child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Column(
@@ -148,8 +152,8 @@ class ScoresWidget extends HookConsumerWidget {
                 ),
               ],
             ),
-        ],
-      ),
+          ),
+      ],
     );
   }
 }
